@@ -90,6 +90,75 @@ public class OperatorPractice {
 		
 	}
 	
+	public void practice6() {
+		
+	System.out.print("정수1 : ");
+	int num1 = sc.nextInt();
 	
+	System.out.print("정수2 : ");
+	int num2 = sc.nextInt();
 	
+	System.out.print("입력 : ");
+	int result = sc.nextInt();
+	System.out.println(
+			(result <= num1) ||
+				(result >= num2) ?
+					"true" : "false"
+			); 
+	
+	}
+	
+	public void practice7() {
+		
+		System.out.print("입력1 : ");
+		int num1 = sc.nextInt();
+		
+		
+		System.out.print("입력2 : ");
+		int num2 = sc.nextInt();
+				
+		System.out.print("입력3 : ");
+		int num3 = sc.nextInt();
+		
+		System.out.println(
+				(num1 == num2)&&
+				(num2 == num3)
+				? "true" : "false"
+				);
+		
+	}
+	
+	public void practice8() {
+		
+		System.out.print("A사원의 연봉 : ");
+		int Anum = sc.nextInt();
+		
+		System.out.print("B사원의 연봉 : ");
+		int Bnum = sc.nextInt();
+		
+		System.out.print("C사원의 연봉 : ");
+		int Cnum = sc.nextInt();
+		
+		double result1 = Anum + (Anum * 0.4);
+		System.out.println("A사원의 연봉/연봉+a : "
+				+ Anum + "/" + result1 + 
+					"\n" + 
+						(result1 >= 3000 ? "3000 이상" : "3000 미만")
+							);
+		
+		double result2 = Bnum;
+		System.out.println("B사원의 연봉/연봉+a : "
+				+ Bnum + "/" + result2  
+					+"\n"+ 
+						(result2 >= 3000 ? "3000 이상" : "3000 미만")
+							);
+		
+		double result3 = Cnum + (Cnum * 0.15);
+		System.out.println("B사원의 연봉/연봉+a : "
+				+ Cnum + "/" + result3  
+					+"\n"+ 
+						((float)result3 >= 3000 ? "3000 이상" : "3000 미만")
+							);
+		
+	}
 }

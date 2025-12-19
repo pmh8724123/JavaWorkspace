@@ -6,7 +6,7 @@ public class VariablePractice4 {
 	public void practice4() {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.printa("첫 번째 문자 : ");
+		System.out.print("첫 번째 문자 : ");
 		
 		System.out.println("문자열을 입력 : ");
 		String str = sc.next();	//apple

@@ -290,8 +290,44 @@ public class ControlPractice {
 		
 		
 	}
-	
-	public void practice8() {
+		
+		public void practice8() {
+		
+		System.out.print("피연산자 1 : ");
+		int num1 = sc.nextInt();
+		
+		System.out.print("피연산자 2 : ");
+		int num2 = sc.nextInt();
+		
+		System.out.print("연산자 입력 : ");
+		char ch = sc.next().charAt(0);
+		
+		if(!(num1 > 0 && num2 >0 &&
+				(ch == '+' || ch == '-' || ch == '*' || ch =='/' || ch == '%')
+				)) {
+			System.out.println("잘못입력하셨습니다. 프로그램을 종료합니다.");
+			return;
+		}
+		
+		switch(ch) {
+		case '+' :
+			System.out.println(num1 + ch + num2+" = "+ (num1+num2));
+			break;
+		case '-' :
+			System.out.println(num1 + ch + num2+" = "+ (num1-num2));
+			break;
+		case '*' :
+			System.out.println(num1 + ch + num2+" = "+ (num1*num2));
+			break;
+		case '/' :
+			System.out.println(num1 + ch + num2+" = "+ (num1 /(double) num2));
+			break;
+		case '%' :
+			System.out.println(num1 + ch + num2+" = "+ (num1 % num2));
+			break;
+		}
+		}
+	/*public void practice8() {
 		
 		System.out.println("피연산자1 입력 : ");
 		int num1 = sc.nextInt();
@@ -311,6 +347,30 @@ public class ControlPractice {
 		System.out.println(result);
 		
 		
-	}
+	}*/
+		
+		public void practice11() {
+			System.out.print("비밀번호 입력 : (1000 ~ 9999) : ");
+			int pwd = sc.nextInt();
+			
+			if(!(pwd >= 1000 && pwd <= 9999)){
+				System.out.println("자리 수 안 맞음");
+			} return;
+			
+			int first = pwd / 1000; // 1234 / 1000 = 1(.234)
+			int second = pwd / 100 % 10; // 1234 / 100 =? 12(.34) % 10 => 2
+			int third = pwd / 10 % 10;  // 1234 / 10 => 123 % 10 =? 3 => charAt(2)
+			int fourth = pwd % 10; // 1234 % 10 => 4
+			
+			if(first == second || first == third || first == fourth || second == third || second == fourth || third == fourth) {
+				System.out.println("중복값 있음");
+			}else {
+				System.out.println("생성 성공");
+			}
+			
+			
+			
+			
+		}
 }
 

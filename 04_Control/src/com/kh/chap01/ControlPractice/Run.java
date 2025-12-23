@@ -6,7 +6,7 @@ public class Run {
 		// cp.practice1();
 		// cp.practice2();
 //		cp.practice3();
-		cp.practice7();
+		cp.practice11();
 
 	}
 }

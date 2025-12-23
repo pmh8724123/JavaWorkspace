@@ -40,7 +40,7 @@ public class A_For {
 	public void method2() {
 		// 1 2 3 4 5 
 		for(int i = 1; i <= 5; i++) {
-			System.out.print(i+" ");
+			System.out.print(i+"안녕! ");
 		}
 		
 	}
@@ -136,31 +136,59 @@ public class A_For {
 		
 		for(int i = 1; i <= 9; i++) {
 			System.out.println("2 X " + i + " = " + (2 * i));
-			
+		}
+		
+		// 구구단 2단부터 ~ 9단까지 모두 출력
+		for (int dan = 2; dan <= 9; dan++) {
+			for(int i = 1; i <= 9; i++) {
+			System.out.println(dan+" X "+i+ " = " + (2 * i));
+			}
 		}
 	}
 	
+	public void method8() {
+		//*****\n
+		//*****\n
+		//*****\n
+		//*****\n
+		// 위 출력형식을 중첩반복문을 이용하여 완성하시오..
+		
+		for(int j=0; j<4; j++) {
+			for(int i=0; i<5; i++) {
+				System.out.print("*");
+			}
+			System.out.println();
+			//System.out.print("\n);
+		}
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void method9() {
+		//1***\n
+		//*2**\n
+		//**3*\n
+		//***4\n
+		
+		for(int i=0; i<4; i++) {
+			if(i == 0) System.out.print(1);
+			else System.out.print("*");
+		}
+		System.out.println();
+		
+		for(int i=0; i<4; i++) {
+			if(i == 0) System.out.print(2);
+			else System.out.print("*");
+		}
+		System.out.println();
+		
+		for(int i=0; i<4; i++) {
+			for(int j = 0; j<4; j++) {
+				if(j==i) System.out.print(i+1);
+				else System.out.print("*");
+			}
+			System.out.println();
+		}
+		
+}
 	
 	
 	

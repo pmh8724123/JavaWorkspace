@@ -23,6 +23,19 @@ public class FieldTest1 {
 //	   생성시점 : 특정영역이 실행될 때 저장공간이 할당(stack)
 //	   소멸시점 : 특정영역이 끝날 때.
 	private int global; // 전역변수 (필드)
+	{
+		// 초기화 블럭 (거의 안씀)
+		// 객체 생성 시 최초 1회 실행.
+		global = 50;
+	}
+	
+	public static in num;
+	// static 초기화 블럭
+	static {
+		// static 변수를 초기화 하는데 사용한다.
+		// 프로그램 실행될 때 최초 1회 실행
+		num = 55;
+	}
 
 	public void test(int num) { // 매개변수(지역변수)
 		int local = 0; // 지역변수

@@ -93,8 +93,8 @@ public class Employee {
 
 	// 직원 정보 반환
 	public String printEmployee() {
-
-		return "";
+		
+		return this.empNo+" "+this.name+" "+gender+" "+phone+" "+dept+" "+salary+" "+bonus;
 	}
 
 }

@@ -96,5 +96,11 @@ public class Employee {
 		
 		return this.empNo+" "+this.name+" "+gender+" "+phone+" "+dept+" "+salary+" "+bonus;
 	}
+	
+	/*
+	 * @overide
+	 * pulbic String toString(){
+	 * return empNo +" "+name+" "+gender+" "+phone+" " 
+	 */
 
 }

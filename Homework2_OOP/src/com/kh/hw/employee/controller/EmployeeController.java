@@ -38,6 +38,8 @@ public class EmployeeController {
 	// 객체를 삭제하는 메소드
 	public Employee remove() {
 		// 객체 e에 null을 저장하여 객체 삭제
+		// Emloyee = delete;
+		// return delete;
 		e = null;
 		return e;
 	}

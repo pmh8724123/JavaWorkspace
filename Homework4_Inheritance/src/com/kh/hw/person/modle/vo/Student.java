@@ -32,7 +32,7 @@ public class Student extends Person {
 
 	@Override
 	public String toString() {
-		return "Student [grade=" + grade + ", major=" + major + "]";
+		return super.toString()+"Student [grade=" + grade + ", major=" + major + "]";
 	}
 	
 	

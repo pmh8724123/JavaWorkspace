@@ -36,7 +36,7 @@ public class Employee extends Person {
 
 	@Override
 	public String toString() {
-		return "Employee [salary=" + salary + ", dept=" + dept + "]";
+		return super.toString()+"Employee [salary=" + salary + ", dept=" + dept + "]";
 	}
 	
 	

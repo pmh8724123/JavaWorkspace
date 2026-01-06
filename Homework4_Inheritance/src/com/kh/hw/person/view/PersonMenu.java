@@ -3,6 +3,7 @@ package com.kh.hw.person.view;
 import java.util.Scanner;
 
 import com.kh.hw.person.controller.PersonController;
+import com.kh.hw.person.modle.vo.Employee;
 import com.kh.hw.person.modle.vo.Student;
 
 public class PersonMenu {
@@ -90,13 +91,13 @@ public class PersonMenu {
 			case 1:
 				if (N == 10) {
 					System.out.println("사원을 담을 수 있는 공간이 꽉 찼기 때문에 학생 추가 메뉴는 더 이상 활성화 되지 않습니다.");
-				} else if (N <= 2) {
-					insertStudent();
+				} else if (N <= 9) {
+					insertEmployee();
 					break;
 				}
 
 			case 2:
-				printStudent();
+				printEmployee();
 				break;
 			case 9:
 				System.out.println("메인으로 돌아갑니다.");
@@ -158,11 +159,49 @@ public class PersonMenu {
 	}
 
 	public void insertEmployee() {
-		
+		while (true) {
+			System.out.print("사원 이름 :");
+			String name = sc.next();
+
+			System.out.print("사원 나이 :");
+			int age = sc.nextInt();
+
+			System.out.print("사원 키 :");
+			double height = sc.nextDouble();
+
+			System.out.print("사원 몸무게 :");
+			double weight = sc.nextDouble();
+
+			System.out.print("사원 급여 :");
+			int salary = sc.nextInt();
+
+			System.out.print("사원 부서 :");
+			String dept = sc.next();
+
+			pc.insertEmployee(name, age, height, weight, salary, dept);
+
+			int[] smem = pc.personCount();
+			int N = smem[1];
+
+			if (N == 10) {
+				System.out.println("사원을 담을 수 있는 공간이 꽉 찼기 때문에 사원 추가를 종료하고 사원 메뉴로 돌아갑니다.");
+				break;
+			}
+
+			System.out.print("그만하시려면 N(또는 n), 이어하시려면 아무 키나 누르세요 :");
+			char ch = sc.next().toUpperCase().charAt(0);
+			if (ch == 'N') {
+				break;
+			}
+		}
 	}
 
 	public void printEmployee() {
-
+		Employee[] e = pc.printEmployee();
+		for (Employee emem : e) {
+			if (emem != null)
+				System.out.println(emem);
+		}
 	}
 
 }

@@ -12,15 +12,15 @@ public class PersonController {
 
 		int scount = 0;
 		int ecount = 0;
-		for (Student smem : s) {
-			if (smem != null) {
+		for (Student std : s) {
+			if (std != null) {
 				scount++;
 			}
 		}
 		arr[0] = scount;
 
-		for (Employee emem : e) {
-			if (emem != null) {
+		for (Employee emp : e) {
+			if (emp != null) {
 				ecount++;
 			}
 		}
@@ -47,10 +47,17 @@ public class PersonController {
 	}
 
 	public void insertEmployee(String name, int age, double height, double weight, int salary, String dept) {
+		Employee emem = new Employee(name, age, height, weight, salary, dept);
 
+		for (int i = 0; i < s.length; i++) {
+			if (e[i] == null) {
+				e[i] = emem;
+				break;
+			}
+		}
 	}
 
 	public Employee[] printEmployee() {
-
+		return e;
 	}
 }

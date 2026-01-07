@@ -11,41 +11,41 @@ public class LeapController {
 		Calendar cal1 = new GregorianCalendar();
 		int year1 = cal1.get(Calendar.YEAR);
 
-		if (year1 % 4 == 0 && year1 % 100 != 0 || year1 % 400 == 0) {
+		if ((year1 % 4 == 0 && year1 % 100 != 0) || year1 % 400 == 0) {
 			return true;
+
 		}
 
 		return false;
 
 	}
 
-	public long leapDate(Calendar c) {
+	public long leapDate() {
 //		1년 1월 1일부터 오늘까지의 총 날 수를 계산
-		Calendar past = new GregorianCalendar(1, 0, 1);// 과거시간
-		past.set(1, 0, 1);
-		
-		Calendar now = Calendar.getInstance(); // 현재시간
-		
-		long num1 = past.getTimeInMillis();
-		long num2 = now.getTimeInMillis();
-		
-		long diff = (num1 - num2);
-		System.out.println(diff);
-		
-		return diff;
-		
-		
-		
-		
-		
-		
-		
 //		1년부터 현재 연도까지 각 연도가	윤년이면 총 날수에 366일을,평년이면 365일을 더함
-		
 //		해당 현재 연도가 윤년이면 2월을	29일로 평년이면 28일로 더함 
-		
 //		월의 날짜 수를 더함 
-//		(31일: 1, 3, 5, 7, 8, 10, 12월/
+//		(31일: 1, 3, 5, 7, 8, 10, 12월
 //		30일: 4, 6, 9, 11월)
+
+		Calendar past = new GregorianCalendar(1, 0, 1);
+		Calendar now = Calendar.getInstance(); // 현재시간
+
+		long num1 = past.getTimeInMillis(); // 1년1월1일 ~ 1970년1월1일
+		long num2 = now.getTimeInMillis(); // 1970년1월1일 ~ 2026년1월7일
+
+		long diff = (num2 - num1);
+
+		int result = 0;
+
+		for (int i = 1; i < now.get(Calendar.YEAR); i++) {
+			if (this.isLeapYear(i)) {
+				result += 366;
+			} else {
+				result += 365;
+			}
+		}
+		return result;
 	}
+
 }

@@ -22,7 +22,7 @@ public class AniBook extends Book {
 
 	@Override
 	public String toString() {
-		return "AniBook [accessAge=" + accessAge + "]";
+		return super.toString() + accessAge;
 	}
 	
 	

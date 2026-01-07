@@ -3,6 +3,7 @@ package com.kh.practice.chap01_poly.view;
 import java.util.Scanner;
 
 import com.kh.practice.chap01_poly.controller.LibraryController;
+import com.kh.practice.chap01_poly.model.vo.Book;
 import com.kh.practice.chap01_poly.model.vo.Member;
 
 public class LibraryMenu {
@@ -25,7 +26,6 @@ public class LibraryMenu {
 
 		// LibraryController의 insertMember() 메소드에 전달
 		lc.insertMember(mem);
-		
 
 //		 ==== 메뉴 ==== // 무한 반복 실행
 		while (true) {
@@ -37,12 +37,6 @@ public class LibraryMenu {
 			System.out.println("9. 프로그램 종료하기");
 			System.out.println("메뉴 번호 : ");
 			int menu = sc.nextInt();
-//		1. 마이페이지 
-//		2. 도서 전체 조회 
-//		3. 도서 검색 
-//		4. 도서 대여하기 
-//		9. 프로그램 종료하기
-//		메뉴 번호 : 
 
 			switch (menu) {
 			case 1:
@@ -65,24 +59,50 @@ public class LibraryMenu {
 				System.out.println("프로그램을 종료합니다.");
 				return;
 			default:
-				break;
+				System.out.println("잘못입력했습니다.");
 			}
 		}
 	}
 
 	public void selectAll() {
-		// LibraryController의 selectAll()메소드 호출하여 결과 값 Book[] 자료형 bList에 담기
-		// for문 이용하여 bList의 모든 도서 목록 출력
-		// 단, i를 이용하여 인덱스도 같이 출력 → 대여할 때 도서번호를 알기 위해
-		// ex ) 0번도서 : 백종원의 집밥 / 백종원 / tvN / true
+		Book[] bList = lc.selectAll();
+		for (int i = 0; i < bList.length; i++) {
+			System.out.println(i + "번도서 : " + bList[i]);
+		}
 	}
 
 	public void searchBook() {
+		// “검색할 제목 키워드 : “ >> 입력 받음 (keyword)
+		System.out.println("검색할 제목 키워드 : ");
+		String keyword = sc.next();
+
+		// LibraryController의 searchBook() 에 전달
+		Book[] searchBookList = lc.searchBook(keyword);
+		for (Book b : searchBookList) {
+			if (b != null)
+				System.out.println(b);
+		}
 
 	}
 
 	public void rentBook() {
+		// 도서대여를 위해 도서번호를 알아야 하기 때문에 selectAll() 메소드 호출
+		selectAll();
 
+		System.out.println("대여할 도서 번호 선택 : ");
+		int index = sc.nextInt();
+		int result = lc.rentBook(index);
+		// “대여할 도서 번호 선택 : ” >> 입력 받음 (index)
+		// LibraryController의 rentBook() 에 전달
+
+		if (result == 0) {
+			System.out.println("성공적으로 대여되었습니다.");
+		} else if (result == 1) {
+			System.out.println("나이 제한으로 대여 불가능입니다.");
+		} else {
+			System.out.println("성공적으로 대여되었습니다. 요리학원 쿠폰이 발급되었으니 마이페이지에서 확인하세요");
+
+		}
 	}
 
 }

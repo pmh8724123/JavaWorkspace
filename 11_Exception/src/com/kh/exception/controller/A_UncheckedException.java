@@ -1,5 +1,6 @@
 package com.kh.exception.controller;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class A_UncheckedException {
@@ -30,10 +31,10 @@ public class A_UncheckedException {
 		// ArithmeticException
 		// - 나누기 연산시 0으로 나눌 때 발생
 
-		System.out.println("첫 번째 정수 : ");
+		System.out.print("첫 번째 정수 : ");
 		int num1 = sc.nextInt();
 
-		System.out.println("두 번째 정수: ");
+		System.out.print("두 번째 정수: ");
 		int num2 = sc.nextInt();
 
 		// 예외처리 방법 1) 조건문으로 애초에 예외가 발생하지 않게끔 처리한다. -> 에러가 안나게 하는 방법
@@ -42,6 +43,7 @@ public class A_UncheckedException {
 //		} else {
 //			System.out.println("나눗셈 연산 결과 : " + (num1 / num2));
 //		}
+		
 		// 예외처리 방법 2) try~catch문으로 해결하기
 		/*
 		 * try ~ catch문
@@ -52,7 +54,6 @@ public class A_UncheckedException {
 		 * } catch(발생될 수 있는 예외 클래스) {
 		 *   // 해당예외가 발생 시 실행할 구문.
 		 * }
-		 *  
 		 * */
 		try {
 			// ArithmeticException이 발생할 수 있는 코드.
@@ -65,4 +66,57 @@ public class A_UncheckedException {
 		System.out.println("프로그램 종료");
 
 	}
+	
+	public void method2() {
+		System.out.print("정수 입력(0제외) : ");
+		
+		try {
+			int num = sc.nextInt();
+			System.out.println("나눗셈 연산 결과 : " + (10 / num));
+		}catch(ArithmeticException e) {
+			System.out.println("으로 나눌 수 없습니다.");
+		}catch(InputMismatchException e){
+			System.out.println("정수를 제대로 입력하세요.");
+		} // 다중예외처리문접 : 예외가 여러개인 경우 사용
+		
+		System.out.println("프로그램 종료");
+		
+	}
+	
+	public void method3() {
+		// ArrayIndexOutOfBoundsException
+		// NegativeArraySizeException
+		System.out.print("배열의 크기 : ");
+		int size = sc.nextInt();
+		
+		// 예외처리 방법 1. 다중 catch 블럭
+//		try {
+//			int[] arr = new int[size];
+//			System.out.println("100번째 인덱스의 값 : " + arr[100]);
+//		} catch (NegativeArraySizeException e) {
+//			System.out.println("배열의 크기는 음수일 수 없습니다.");
+//		} catch (ArrayIndexOutOfBoundsException e) {
+//			System.out.println("부적절한 인덱스입니다.");
+//		}
+		
+		// 처리방법 2. 다형성을 이용한 catch
+		try {
+			int[] arr = new int[size];
+			System.out.println("100번째 인덱스의 값 : " + arr[100]);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("잘못된 인덱스 접근입니다.");
+		} catch (RuntimeException e) { // 다형성 적용
+			System.out.println("예외가 발생했습니다.");
+			e.printStackTrace();
+		}
+	}
+	
+	/* 
+	 * RuntimException과련된 예외는
+	 *  - 조건문으로 해결이 가능하기 때문에 예외 자체가 애초에 발생 안되게끔 개발자가 소스코드로 핸들링하는게 권장된다.
+	 *  - 예외처리 구문으로도 해결이 가능하긴 하다.
+	 *  
+	 * 예측이 가능한 상황 => 조건문으로 해결 
+	 * 예측이 불가능한 상황 => 예외처리 구문으로 해결
+	 * */
 }

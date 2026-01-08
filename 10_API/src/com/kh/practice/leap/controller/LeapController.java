@@ -11,13 +11,10 @@ public class LeapController {
 		Calendar cal1 = new GregorianCalendar();
 		int year1 = cal1.get(Calendar.YEAR);
 
-		if ((year1 % 4 == 0 && year1 % 100 != 0) || year1 % 400 == 0) {
+		if (year1 % 4 == 0 && (year1 % 100 != 0 || year1 % 400 == 0)) {
 			return true;
-
 		}
-
 		return false;
-
 	}
 
 	public long leapDate() {
@@ -34,7 +31,7 @@ public class LeapController {
 		long num1 = past.getTimeInMillis(); // 1년1월1일 ~ 1970년1월1일
 		long num2 = now.getTimeInMillis(); // 1970년1월1일 ~ 2026년1월7일
 
-		long diff = (num2 - num1);
+		long total = (num2 - num1);
 
 		int result = 0;
 
@@ -47,5 +44,32 @@ public class LeapController {
 		}
 		return result;
 	}
-
-}
+		// 강사님 코드
+//		long total = 0;
+//		for(int i = 1; i<c.get(Calendar.YEAR); i++) {
+//			if(isLeapYear(i)) {
+//				total += 366;
+//			}else {
+//				total += 365;
+//			}
+//			
+//		}
+//		int month = c.get(Calendar.MONTH);
+//		for(int i = 0; i < month; i++) {
+//			switch(i) {
+//			case 1 , 3, 5, 7, 8, 10, 12 :
+//				total += 31;
+//				break;
+//			case 4, 6, 9, 11 :
+//				total += 30;
+//				break;
+//			case 2 :
+//				total += isLeapYear(c.get(Calendar.YEAR)) ? 29 : 28;
+//				break;
+//			}
+//		}
+//		int date = c.get(Calendar.DATE);
+//		total += date;
+//		
+//		return total;
+	}

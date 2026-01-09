@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-// DAO (Date Access Object)
+// DAO (Data Access Object)
 //  - 데이터에 연결하기 위한 용도의 클래스를 관리하는 패키지
 public class FileByteDao {
 
@@ -15,7 +15,6 @@ public class FileByteDao {
 		// FileOutputStream : 파일로 데이터를 1byte단위로 출력하는 스트림
 		// new FileOutputStream(입출력할파일객체 혹은 파일명);
 		FileOutputStream fout = null;
-		
 		try {
 			// 1. FileOutputStream 객체 생성 == 입출력할 파일과 연결
 			//  - 매개변수로 전달한 파일이 존재하지 않으면 해당파일을 새로 생성하면서 통로가 개설된다.
@@ -25,17 +24,16 @@ public class FileByteDao {
 			fout = new FileOutputStream(new File("a_byte.txt"), true);
 			
 			// 2. 연결통로로 데이터 출력
-			//   - write() : 0 ~ 127까지의 숫자만 사용가능. 즉, 영문자만 제대로 표현될 수 있다.
+			//   - write() : 0 ~ 127까지의 숫자만 사용가능. 즉, 영문자만 제대로 표현될 수 있다. 
 			fout.write(65); // 'A'
 			fout.write(66); // 'B'
-			fout.write('민'); // 일반 바이트스트림은 한글과 같은 유니코드문자는 표현이 불가능하다.
+			fout.write('민'); // 일반 바이트스트림으로는 한글과 같은 유니코드문자는 표현이 불가능하다.
 			
 			byte[] bArr = {99,100,101};
 			fout.write(bArr); // cde
 			
-//			// 3. 다 쓴 스트림 반납하기
-//			fout.close();
-			
+			// 3. 다 쓴 스트림 반납하기
+			//fout.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -46,8 +44,9 @@ public class FileByteDao {
 			try {
 				fout.close(); // 에러가 났든 아니든 무조건 자원 반납가능.
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 	}
 	
@@ -55,22 +54,28 @@ public class FileByteDao {
 	public void fileRead() {
 		
 		FileInputStream fin = null; // try블럭과 finally에서 동시에 사용
-
+		
 		try {
-			// 1. 입출력객체 생성하기 
+			// 1. 입출력객체생성하기
 			fin = new FileInputStream("a_byte.txt"); // 반드시 존재하는 파일제시
 			
 			// 2. 입력매체로부터 데이터 읽어오기
 			// read() : int
 			//  - 1byte씩 데이터를 읽어온다.
-//			System.out.println(fin.read());
-//			System.out.println(fin.read());
-//			System.out.println(fin.read());
-//			System.out.println(fin.read());
-//			System.out.println(fin.read()); // 더이상 읽은 값이 없는 경우 -1 반환
+			//System.out.println(fin.read());
+			//System.out.println(fin.read());
+			//System.out.println(fin.read());
+			//System.out.println(fin.read());
+			//System.out.println(fin.read());// 더이상 읽은 값이 없는 경우 -1반환
+			
+//			int value = fin.read();
+//			while(value != -1) {
+//				System.out.println(value);
+//				value = fin.read();
+//			}
 			
 			int value = 0;
-			while( ( value = fin.read() ) != -1) {
+			while( ( value = fin.read() )  != -1) {
 				System.out.println(value);
 			}
 			
@@ -78,17 +83,21 @@ public class FileByteDao {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally {
 			try {
 				fin.close();
-			} catch (IOException e) {
+			} catch (IOException e) { 
 				e.printStackTrace();
 			}
-			
 		}
-
 	}
 	
-
 }
+
+
+
+
+
+
+
+

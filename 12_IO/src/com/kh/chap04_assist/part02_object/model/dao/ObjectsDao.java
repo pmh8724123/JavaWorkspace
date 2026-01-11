@@ -28,7 +28,8 @@ public class ObjectsDao {
 	}
 	
 	public void fileRead() {
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("phone_arr.txt"))){
+		try(ObjectInputStream ois = 
+				new ObjectInputStream(new FileInputStream("phone_arr.txt"))){
 				
 			ois.readObject(); // 더이상 읽어들일 객체가 없는 경우, EOFexception을 발생시킨다.
 				

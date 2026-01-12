@@ -1,5 +1,6 @@
 package com.kh.practice.list.library.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.practice.list.library.controller.BookController;
@@ -84,7 +85,7 @@ public class BookMenu {
 
 		System.out.print("장르(1. 인문 / 2. 과학 / 3. 외국어 / 4. 기타) : ");
 		int category = sc.nextInt();
-
+		
 		String str = "";
 		
 		switch (category) {
@@ -99,6 +100,8 @@ public class BookMenu {
 			break;
 		case 4:
 			str = "기타";
+			break;
+		default :
 			break;
 		}
 		
@@ -115,9 +118,17 @@ public class BookMenu {
 	public void selectList() {
 //		BookController)의 selectList() 메소드를 호출 후
 //	 --> 결과 값을 임의의 리스트(ArrayList<Book> bookList)에 대입
+		ArrayList<Book> bookList = bc.selectList();
 //	2. 조건식 이용해서
 //	 2_1. bookList가 "비어있는 경우" --> "존재하는 도서가 없습니다." 라는 알람 문구 출력
+		if(bookList.isEmpty()) {
+			System.out.println("존재하는 도서가 없습니다.");
 //	 2_2. bookList가 "비어있지 않은 경우" --> 반복문을 통해 bookList 안의 Book 객체들 출력
+		} else {
+			for (int i = 0; i < bookList.size(); i++) {
+				System.out.println(bookList.get(i));
+			}
+		}
 	}
 	
 	// 3. 도서 검색용 view 메소드
@@ -131,6 +142,18 @@ public class BookMenu {
 //		3. 조건식 이용해서
 //		 3_1. searchList가 "비어있는 경우" --> "검색 결과가 없습니다."라는 알람 문구 출력
 //		 3_2. searchList가 "비어있지 않은 경우" --> 반복문으로 searchList 안의 Book 객체들 출력
+		System.out.println("===== 도서 검색 =====");
+		System.out.print("검색 키워드 : ");
+		String keyword = sc.next();
+		ArrayList<Book> searchList = bc.searchBook(keyword);
+		if(searchList.isEmpty()) {
+			System.out.println("검색 결과가 없습니다.");
+		}else {
+			for(int i = 0; i < searchList.size(); i++) {
+				System.out.println(searchList.get(i));
+			}
+		}
+		
 	}
 	
 	// 4. 도서 삭제용 view 메소드
@@ -139,11 +162,28 @@ public class BookMenu {
 //		2. 삭제할 저자명 입력 받기 (String author)
 //		** 도서명과 저자명을 같이 입력 받는 이유
 //		 --> 같은 도서명이라고 해도 저자명이 다른 도서가 있을 수 있기 때문에
+//		
+		System.out.println("===== 도서 삭제 =====");
+		
+		System.out.print("삭제할 도서 명 : ");
+		String title = sc.nextLine();
+		
+		System.out.print("삭제할 저자 명 : ");
+		String author = sc.next();
+		
 //		3. bc(BookConroller)의 deleteBook() 메소드로 위의 title, autor 값 전달 후
 //		--> 결과 값을 임의의 Book(Book remove)에 대입
+		Book b = bc.deleteBook(title, author);
+		
 //		4. 조건식 이용해서
 //		 4_1. remove가 존재하는 경우 --> "성공적으로 삭제되었습니다."라는 문구 출력
 //		 4_2. remove가 존재하지 않은 경우 --> "삭제할 도서를 찾지 못했습니다."라는 문구 출력
+		if(b == null) {
+			System.out.println("삭제할 도서를 찾지 못했습니다.");
+		}else {
+			System.out.println("성공적으로 삭제되었습니다.");
+		}
+		
 	}
 	
 	// 5. 도서 명 오름차순 정렬용 view 메소드

@@ -29,10 +29,17 @@ public class Book {
 	public String getAuthor() {
 		return author;
 	}
-
+	
+	
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [title=" + title + ", author=" + author + ", category=" + category + ", price=" + price + "]";
+	}
+	
 
 	public String getCategory() {
 		return category;
@@ -51,14 +58,14 @@ public class Book {
 	}
 	
 	public int hashCode() {
-		
+		return 0;
 	}
 	
 	public boolean equals() {
-		
+		return false;
 	}
 	
 	public int compareTo() {
-		
+		return 0;
 	}
 }

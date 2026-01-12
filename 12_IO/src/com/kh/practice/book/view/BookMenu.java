@@ -1,6 +1,5 @@
 package com.kh.practice.book.view;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -32,6 +31,7 @@ public class BookMenu {
 			System.out.println("9. 프로그램 끝내기");
 			System.out.print("메뉴 번호 : ");
 			int menu = sc.nextInt();
+			sc.nextLine();
 
 			switch (menu) {
 			case 1:
@@ -59,9 +59,9 @@ public class BookMenu {
 		// 입력 받은 출판날짜를 split()를 통해 년, 월, 일로 나누고 Calendar에 담음
 		System.out.print("도서 명 : ");
 		String title = sc.nextLine();
-		sc.nextLine();
+
 		System.out.print("저자 명 : ");
-		String author = sc.nextLine();
+		String author = sc.next();
 
 		System.out.print("도서 가격 : ");
 		int price = sc.nextInt();
@@ -70,6 +70,9 @@ public class BookMenu {
 		String date = sc.next();
 
 		String[] arr = date.split("-");
+
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]) - 1, Integer.parseInt(arr[2]));
 
 		int year = Integer.parseInt(arr[0]);
 		int month = Integer.parseInt(arr[1]);
@@ -96,9 +99,11 @@ public class BookMenu {
 
 	public void fileRead() {
 		// bc에 fileRead()의 반환 값을 가지고 저장된 데이터 출력
-		for (int i = 0; i < bArr.length; i++) {
-			if (bArr[i] != null) {
-				System.out.println(bArr[i]);
+		Book[] bArr = bc.fileRead();
+
+		for (Book b : bArr) {
+			if (b != null) {
+				System.out.println(b);
 			}
 		}
 	}

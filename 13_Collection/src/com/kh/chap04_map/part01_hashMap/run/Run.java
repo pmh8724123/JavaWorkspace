@@ -35,6 +35,7 @@ public class Run {
 		// 2. get(K key) : V -> HashMap에서 key와 일치하는 value값을 찾는 메서드
 		System.out.println(hm.get("두쫀쿠"));
 		
+		
 		// 3. size() : 초기화된 데이터 수 반환
 		System.out.println(hm.size());
 		

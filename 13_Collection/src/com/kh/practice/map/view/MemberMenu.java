@@ -1,6 +1,8 @@
 package com.kh.practice.map.view;
 
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import com.kh.practice.map.controller.MemberController;
 import com.kh.practice.map.model.vo.Member;
@@ -35,7 +37,7 @@ public class MemberMenu {
 				joinMembership();
 				break;
 			case 2:
-				memberMenu();
+				logIn();
 				break;
 			case 3:
 				sameName();
@@ -88,7 +90,7 @@ public class MemberMenu {
 
 	public void joinMembership() {
 //		회원가입하기 위해 아이디, 비밀번호, 이름을 받고 
-		System.out.print("아아디 : ");
+		System.out.print("아이디 : ");
 		String id = sc.next();
 
 		System.out.print("비밀번호 : ");
@@ -104,7 +106,7 @@ public class MemberMenu {
 		boolean result = mc.joinMembership(id, m);
 
 //		받은 결과에 따라 true면 “성공적으로 회원가입 완료하였습니다.”,
-		if (result) {
+		if (result == true) {
 			System.out.println("성공적으로 회원가입 완료하였습니다.");
 //		false면 “중복된 아이디입니다. 다시 입력해주세요.” 출력
 		} else {
@@ -115,32 +117,86 @@ public class MemberMenu {
 
 	public void logIn() {
 //		아이디와 비밀번호를 사용자에게 받아 mc의 logIn()메소드로 넘겨 줌
-//		반환 값 있으면 “OOO님, 환영합니다!” 출력 후 로그인 된 화면으로(memberMenu()),
-//		없으면 “틀린 아이디 또는 비밀번호입니다. 다시 입력해주세요.” 출력 후 반복
 
+		System.out.print("아이디 : ");
+		String id = sc.next();
+
+		System.out.print("비밀번호 : ");
+		String password = sc.next();
+
+		String str = mc.logIn(id, password);
+
+		if ("".equals(str) || str == null) {
+//		없으면 “틀린 아이디 또는 비밀번호입니다. 다시 입력해주세요.” 출력 후 반복
+			System.out.println("틀린 아이디 또는 비밀번호입니다. 다시 입력해주세요.");
+		} else {
+//		반환 값 있으면 “OOO님, 환영합니다!” 출력 후 로그인 된 화면으로(memberMenu()),
+			System.out.println(str + "님, 환영합니다.");
+			memberMenu();
+		}
 	}
 
 	public void changePassword() {
 //		아이디와 비밀번호, 변경할 비밀번호를 받아 mc의 chagePassword()로 보냄.
 //		받은 결과 값이 true면 “비밀번호 변경에 성공했습니다.”,
 //		false면 “비밀번호 변경에 실패했습니다. 다시 입력해주세요.” 출력 후 반복
+		System.out.print("아이디 : ");
+		String id = sc.next();
 
+		System.out.print("현재 비밀번호 : ");
+		String oldPw = sc.next();
+
+		System.out.print("새로운 비밀번호 : ");
+		String newPw = sc.next();
+
+		boolean result = mc.changePassword(id, oldPw, newPw);
+
+		if (result) {
+			System.out.println("비밀번호 변경에 성공했습니다.");
+		} else {
+			System.out.println("비밀번호 변경에 실패했습니다. 다시 입력해주세요");
+		}
 	}
 
 	public void changeName() {
-//		아이디와 비밀번호를 받아 mc의 logIn()으로 넘겨 현재 저장되어 있는 이름을 받고
-//		사용자에게 현재 저장되어 있는 이름을 출력하여 보여줌.
-//		변경할 이름을 받아 mc의 chageName()로 id와 함께 넘기고
-//		“이름 변경에 성공하였습니다.” 출력
-//		만일 logIn()로부터 저장되어 있는 이름을 받지 못 했다면
-//		“이름 변경에 실패했습니다. 다시 입력해주세요” 출력 후 반복
+//		아이디와 비밀번호를 받아 mc의 logIn()으로 넘겨 현재 저장되어 있는 이름을 받고 사용자에게 현재 저장되어 있는 이름을 출력하여 보여줌.
+//		변경할 이름을 받아 mc의 chageName()로 id와 함께 넘기고 “이름 변경에 성공하였습니다.” 출력
+//		만일 logIn()로부터 저장되어 있는 이름을 받지 못 했다면 “이름 변경에 실패했습니다. 다시 입력해주세요” 출력 후 반복
+
+		System.out.print("아이디 : ");
+		String id = sc.next();
+
+		System.out.print("비밀번호 : ");
+		String password = sc.next();
+
+		String name = mc.logIn(id, password);
+
+		if (name == null) {
+			System.out.println("이름 변경에 실패했습니다. 다시 입력해주세요");
+		} else {
+			System.out.println("현재 설정된 이름 : " + name);
+			System.out.print("변경할 이름 : ");
+
+			String newName = sc.next();
+			mc.changerName(id, newName);
+
+			System.out.println("이름 변경에 성공하였습니다.");
+		}
 
 	}
 
 	public void sameName() {
 //		검색할 이름을 받고 mc의 sameName()메소드로 넘김.
 //		반환 값을 가지고 entrySet()을 이용하여 ‘이름-아이디’ 형식으로 출력
+		System.out.print("검색할 이름 : ");
+		String name = sc.next();
+		
+		TreeMap<String, String> treeMap = mc.sameName(name);
+		
+		for (Map.Entry<String, String> entry : treeMap.entrySet()) {
+			System.out.println(entry.getValue() + " - " + entry.getKey());
 
 	}
 
+}
 }

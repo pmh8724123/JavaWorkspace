@@ -1,5 +1,7 @@
 package com.kh.practice.list.library.model.vo;
 
+import java.util.Objects;
+
 public class Book {
 	private String title;
 	private String author;
@@ -47,6 +49,7 @@ public class Book {
 
 	public void setCategory(String category) {
 		this.category = category;
+		
 	}
 
 	public int getPrice() {
@@ -57,15 +60,56 @@ public class Book {
 		this.price = price;
 	}
 	
+//	public int hashCode() {
+//		// 전통적인 hashCode 생성방식
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + price;
+//		result = prime * result + (title == null ? 0 : title.hashCode());
+//		result = prime * result + (author == null ? 0 : author.hashCode());
+//		result = prime * result + (category == null ? 0 : category.hashCode());
+//		
+//		return result;
+//	}
+//	
+//	public boolean equals(Object obj) {
+//		
+//		if(!(obj instanceof Book)) {
+//			return false;
+//		}
+//		
+//		Book b = (Book) obj;
+//		
+//		if(this.title.equals(b.title) 
+//				&& this.author.equals(b.author) 
+//				&& this.category.equals(b.category) 
+//				&& this.price == b.price) {
+//			return true;
+//		}
+//		
+//		return false;
+//		
+//	}
+	public int compareTo(Object o) {
+		return this.title.compareTo(((Book)o).title);
+	}
+	
+	@Override
 	public int hashCode() {
-		return 0;
+		return Objects.hash(author, category, price, title);
 	}
-	
-	public boolean equals() {
-		return false;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		return Objects.equals(author, other.author) && Objects.equals(category, other.category) && price == other.price
+				&& Objects.equals(title, other.title);
 	}
-	
-	public int compareTo() {
-		return 0;
-	}
+
 }

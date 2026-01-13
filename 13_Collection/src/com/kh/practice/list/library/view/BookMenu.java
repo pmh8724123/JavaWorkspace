@@ -88,6 +88,7 @@ public class BookMenu {
 		
 		String str = "";
 		
+		
 		switch (category) {
 		case 1:
 			str = "인문";
@@ -104,6 +105,9 @@ public class BookMenu {
 		default :
 			break;
 		}
+		
+		// String[] arr = {"인문","자연과학","의료","기타"}
+//		Book b = new Book(title, author, arr[category -1 ], price);
 		
 		System.out.print("가격 : ");
 		int price = sc.nextInt();
@@ -127,6 +131,9 @@ public class BookMenu {
 		} else {
 			for (int i = 0; i < bookList.size(); i++) {
 				System.out.println(bookList.get(i));
+//			for(Book b : bookList) {
+//				System.out.println(b);
+//			}
 			}
 		}
 	}
@@ -144,13 +151,19 @@ public class BookMenu {
 //		 3_2. searchList가 "비어있지 않은 경우" --> 반복문으로 searchList 안의 Book 객체들 출력
 		System.out.println("===== 도서 검색 =====");
 		System.out.print("검색 키워드 : ");
-		String keyword = sc.next();
+		String keyword = sc.nextLine();
+		
 		ArrayList<Book> searchList = bc.searchBook(keyword);
+		
 		if(searchList.isEmpty()) {
 			System.out.println("검색 결과가 없습니다.");
 		}else {
 			for(int i = 0; i < searchList.size(); i++) {
 				System.out.println(searchList.get(i));
+//				for(Book b : searchList) {
+//					System.out.println(b);
+//				}
+				
 			}
 		}
 		
@@ -169,16 +182,16 @@ public class BookMenu {
 		String title = sc.nextLine();
 		
 		System.out.print("삭제할 저자 명 : ");
-		String author = sc.next();
+		String author = sc.nextLine();
 		
 //		3. bc(BookConroller)의 deleteBook() 메소드로 위의 title, autor 값 전달 후
 //		--> 결과 값을 임의의 Book(Book remove)에 대입
-		Book b = bc.deleteBook(title, author);
+		Book remove = bc.deleteBook(title, author);
 		
 //		4. 조건식 이용해서
 //		 4_1. remove가 존재하는 경우 --> "성공적으로 삭제되었습니다."라는 문구 출력
 //		 4_2. remove가 존재하지 않은 경우 --> "삭제할 도서를 찾지 못했습니다."라는 문구 출력
-		if(b == null) {
+		if(remove == null) {
 			System.out.println("삭제할 도서를 찾지 못했습니다.");
 		}else {
 			System.out.println("성공적으로 삭제되었습니다.");
@@ -190,6 +203,12 @@ public class BookMenu {
 	public void ascBook() {
 //		bc(BookController)의 ascBook() 메소드 값에 따라
 //		성공 시 “정렬에 성공하였습니다.”, 실패 시 “정렬에 실패하였습니다.” 출력
+		int result = bc.ascBook();
+		if(result == 1) {
+			System.out.println("정렬에 성공하였습니다.");
+		}else {
+			System.out.println("정렬에 실패하였습니다.");
+		}
 	}
 	
 	

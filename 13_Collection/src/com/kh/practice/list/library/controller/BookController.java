@@ -1,6 +1,7 @@
 package com.kh.practice.list.library.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.kh.practice.list.library.model.vo.Book;
@@ -10,7 +11,7 @@ public class BookController {
 	private List<Book> bookList = new ArrayList<>();
 
 	public BookController() {
-		
+
 		// 초기 값 4개 추가
 		bookList.add(new Book("자바의 정석", "남궁 성", "기타", 20000));
 		bookList.add(new Book("쉽게 배우는 알고리즘", "문병로", "기타", 15000));
@@ -27,7 +28,7 @@ public class BookController {
 	public ArrayList<Book> selectList() {
 		// 해당 bookList의 주소 값 반환
 		
-		return (ArrayList<Book>)bookList;
+		return (ArrayList<Book>) bookList;
 	}
 
 	public ArrayList<Book> searchBook(String keyword) {
@@ -35,11 +36,18 @@ public class BookController {
 		// 반복문을 통해 list의 책 중 책 명에 전달 받은 keyword가 포함되어있는 경우
 		// searchList에 해당 책 추가하고 searchList 반환
 		ArrayList<Book> searchList = new ArrayList<>();
+		
 		for (int i = 0; i < bookList.size(); i++) {
 			if (bookList.get(i).getTitle().contains(keyword)) {
 				searchList.add(bookList.get(i));
 			}
 		}
+//		for(Object o : bookList) {
+//			Book b = (Book) o;
+//			if(b.getTitle().contains(keyword)) {
+//				searchList.add(b);
+//			}
+//		}
 		return searchList;
 	}
 
@@ -48,20 +56,25 @@ public class BookController {
 		// 반복문을 통해 bookList의 책 중 책 명이 전달 받은 title과 동일하고
 		// 저자 명이 전달 받은 author와 동일한 경우 해당 인덱스 도서 삭제 후 빠져나감
 		// 이 때 해당 인덱스 도서를 removeBook에 대입 후 removeBook 반환
-		
-		 Book b = null;
-		 
-		 for(int i = 0; i < bookList.size(); i++) {
-			 if(bookList.get(i).getTitle().equals(title) && bookList.get(i).getAuthor().equals(author)) {
-				 b = bookList.remove(i);
-			 }
-		 }
-		 return b;
 
+		Book removeBook = null;
+
+		for (int i = 0; i < bookList.size(); i++) {
+			if (bookList.get(i).getTitle().equals(title) && bookList.get(i).getAuthor().equals(author)) {
+				removeBook = bookList.remove(i);
+			}
+		}
+		return removeBook;
+
+//			 Book b = bookList.get(i);
+//			if(b.getTitle().equals(title) && b.getAuthor().equals(author)) {
+//				removeBook = bookList.remove(i);
+//			}
 	}
 
 	public int ascBook() {
 		// 책 이름으로 오름차순 후 1 반환
+		Collections.sort(bookList);
 		return 1;
 	}
 

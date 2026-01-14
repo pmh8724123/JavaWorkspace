@@ -12,12 +12,21 @@ public class MemberController {
 	public boolean joinMembership(String id, Member m) {
 		// 전달 받은 id가 없다면 id와 m을 map에 추가 후 true 반환
 		// 있다면 false 값 반환
+		
 		if (map.get(id) == null) {
 			map.put(id, m);
 			return true;
 		}
 		return false;
 	}
+		
+//		boolean result = map.containsKey(id);
+//		if(result) {
+//			return false;
+//		} else {
+//			map.put(id, m);
+//			return true;
+//		}
 
 	public String logIn(String id, String password) {
 		// 전달 받은 id가 존재하는지 확인 후
@@ -62,7 +71,7 @@ public class MemberController {
 
 		for (String key : set) {
 			if (map.get(key).getName().equals(name)) {
-				treeMap.put(key, name);
+				treeMap.put(key, map.get(key).getName());
 			}
 		}
 

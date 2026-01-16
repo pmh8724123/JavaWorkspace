@@ -10,7 +10,7 @@ public class Vegetable extends Farm{
 	}
 
 	public Vegetable(String kind, String name) {
-		super();
+		super(kind);
 		this.name = name;
 	}
 
@@ -24,7 +24,7 @@ public class Vegetable extends Farm{
 
 	@Override
 	public String toString() {
-		return "Vegetable [name=" + name + "]";
+		return super.getKind() + " : " + name;
 	}
 
 	@Override

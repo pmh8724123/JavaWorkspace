@@ -65,7 +65,7 @@ public class TokenMenu {
 		System.out.print("찾을 문자를 하나 입력하세요 : ");
 		char ch = sc.next().charAt(0);
 		
-		System.out.println(ch+" 문자 들어간 문자 갯수 : "+tc.findChar(str, ch));
+		System.out.println(ch+" 문자 들어간 문자 갯수 : " + tc.findChar(str, ch));
 		
 		// tc에 findChar()로 위에 입력 받은 문자열과 방금 받은 문자를 인자로 넘겨
 		// 반환 값 출력

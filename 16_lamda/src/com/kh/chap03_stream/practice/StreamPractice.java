@@ -1,17 +1,9 @@
 package com.kh.chap03_stream.practice;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Member;
-import java.security.cert.CollectionCertStoreParameters;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 public class StreamPractice {
@@ -67,12 +59,12 @@ public class StreamPractice {
 				new Student("김말똥", 29, 90), 
 				new Student("아무개", 23, 70));
 		String[] wordArr = { "a b c d", "홍 길동", "h el lo wor ld" };
-		IntStream dan = IntStream.range(1, 10);
+		IntStream su = IntStream.range(1, 10);
 		
 		// 1. list에서 중복을 제거한 후 짝수만 출력하는 프로그램을 만드시오.(스트림활용)
 		// 결과 : 6 2 4 10
-		Stream<Integer> stream = list.stream();
-		stream
+		list.
+		stream()
 		.distinct()
 		.filter( i -> i % 2 == 0)
 		.forEach( i -> System.out.print(i + " "));
@@ -81,81 +73,91 @@ public class StreamPractice {
 		
 		// 2. list에서 중복을 제거한 후 값이 5 이상이면서 홀수를 오름차순 출력 하는 프로그램
 		// 결과 : 9 11
-		Stream<Integer> stream1 = list.stream();
-		stream1
+		list
+		.stream()
 		.distinct()
 		.filter(i -> i >= 5 && i % 2 == 1)
-		.sorted()
+		.sorted((i1 , i2) -> i1.compareTo(i2)) // Integer::compareTo
 		.forEach(i -> System.out.print(i + " "));
 		System.out.println("\n-------------------2");
 		
 		// 3. list에서 각 요소에 3을 곱한후 오름차순 출력하는 프로그램
 		// 3 6 9 9 12 12 18 27 30 33
-		Stream<Integer> stream2 = list.stream();
-		stream2
-		.map(i -> i*3)
-		.sorted()
+		list.stream()
+		.map(i -> i * 3)
+		.sorted((i1, i2) -> i1.compareTo(i2)) // Integer::compareTo
 		.forEach(i -> System.out.print(i + " "));
 		System.out.println("\n-------------------3");
 
 		// 4. strlist에서 각 문자를 대문자로 변경한 후 List로 반환하는 프로그램
 		// [A, A, B, B, C, C, D, E, F, G]
-		List<String> stream3 = strlist.stream()
-		        .map(i -> i.toUpperCase())
-		        .collect(Collectors.toList());
-		System.out.print(stream3);
+		List l = strlist.stream()
+		.map(str -> str.toUpperCase())
+		.collect(Collectors.toList());
+		System.out.print(l);
 		System.out.println("\n-------------------4");
 
 		// 5. strlist에서 중복값을 제거후 각 문자를 하나의 문자열로 합쳐서 반환해주는 프로그램
 		// abcdefg
-		String result = strlist.stream()
+		String s = strlist.stream()
 		        .distinct()
-		        .reduce("", (a, b) -> a + b);
+		        .reduce("", (result, str) -> result + str);
+		//.collect(Collectors.joining());
 
-		System.out.println(result);
+		System.out.println(s);
 		System.out.println("\n-------------------5");
 
 		
 		
-		// 6. slist에서 학생의 이름과 나이를 학생이름기 오름차순 정렬하여 출력.
+		// 6. slist에서 학생의 이름과 나이를 학생이름기준 오름차순 정렬하여 출력.
 		// 이름: 나이
 		// 강감찬 : 16 김말똥 : 29 아무개 : 23 이순신 : 25 홍길동 : 15
-		Stream<Student> stream5 = slist.stream();
-		stream5
-		.sorted((s1, s2) -> s1.getName()
-				.compareTo(s2.getName()))
-		.forEach( m -> System.out.print
-				(m.getName() + " : " + m.getAge()+ " ") );
+		slist.
+		stream()
+		.sorted((s1, s2) -> s1.name.compareTo(s2.name))
+		.forEach( std -> System.out.print(std.name + " : " + std.age + " "));
+		
 		System.out.println("\n-------------------6");
 		
 		// 7. slist에서 20살 이상인 학생의 평균점수를 구하는 프로그램
 		// 80.0
 		//      System.out.println(score);
-		double score = slist.stream()
-		.filter( age -> age.getAge() >= 20)
-		.mapToInt( s -> s.getScore())
+		double score = slist
+		.stream()
+		.filter( std -> std.age >= 20)
+		.mapToInt( std -> std.score)
 		.average()
-		.getAsDouble();
+		.orElse(0);
 		
 		System.out.println(score);
-		
 		
 		// 8. wordArr내부요소의 공백을 모두 제거한후 List<String>으로 변환하는 프로그램
 		// 출력결과 : [abcd, 홍길동, helloworld]
 		// String[] wordArr = { "a b c d", "홍 길동", "h el lo wor ld" };
-		List<String> result2 = Arrays.stream(wordArr)
-		.map(s -> s.replace(" ", ""))
+		List result2 = Arrays.stream(wordArr)
+		.map(str -> str.replace(" ", ""))
 		.collect(Collectors.toList());
-		
 		System.out.println(result2);
-
-
 		
 		// 9. dan을 활용하여 구구단 2단~9단까지 출력하는 프로그램을 만드시오
 		// ex) 2 * 1 = 2
 		// 2 * 2 = 4
+		IntStream dan = IntStream.range(2,10);
+		dan
+		.forEach( d -> {
+			IntStream intS = IntStream.range(1, 10);
+			intS.forEach( su2 -> {
+					System.out.printf("%d * %d = %d\n", d, su2, d * su2);
+			});
+			
+		});		
 		
 		// 10. wordArr내부요소의 공백을 제거한 문자열의 길이가 8이상인 요소가 있는지 검사하는 프로그램
 		// 출력결과 : true/false값
+		boolean result3 = Arrays.stream(wordArr)
+		.map( str -> str.replace(" ", ""))
+		.anyMatch( str -> str.length() >= 8);
+		System.out.println(result3);
+		
 	}
 }
